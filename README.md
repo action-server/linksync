@@ -1,8 +1,8 @@
+> This is a work in progress.
 # LinkSync
-
 A simple logic gate simulator written in Java.
 
-> This is a work in progress
+![master branch](https://github.com/action-server/linksync/actions/workflows/ci.yml/badge.svg?branch=master)
 
 # Goals
 
