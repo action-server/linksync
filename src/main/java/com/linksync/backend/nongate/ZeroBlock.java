@@ -1,6 +1,6 @@
-package com.linksync.backend.nongates;
+package com.linksync.backend.nongate;
 
-import com.linksync.backend.abstracts.AbstractLink;
+import com.linksync.backend.abstracts.AbstractConnection;
 
 /**
  * This is a ZeroBlock class, that returns the result false.
@@ -8,7 +8,7 @@ import com.linksync.backend.abstracts.AbstractLink;
  * @author Ahmed Elhori
  */
 
-public class ZeroBlock extends AbstractLink {
+public class ZeroBlock extends AbstractConnection {
   @Override
   public boolean result() {
     return false;

@@ -1,4 +1,4 @@
-package com.linksync.backend.nongates;
+package com.linksync.backend.nongate;
 
 import lombok.Getter;
 import org.junit.jupiter.api.Test;

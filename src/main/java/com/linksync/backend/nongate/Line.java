@@ -1,7 +1,8 @@
-package com.linksync.backend.nongates;
+package com.linksync.backend.nongate;
 
-import com.linksync.backend.interfaces.Link;
+import com.linksync.backend.api.Link;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,18 +11,16 @@ import lombok.Setter;
  * @author Ahmed Elhori
  */
 
+@RequiredArgsConstructor
 public class Line {
+  @Getter
+  private final int index;
+  @Getter
+  private final Link link;
   @Setter
   private volatile boolean current = false;
 
-  @Getter
-  private Link link;
-
-  public Line(Link link) {
-    this.link = link;
-  }
-
-  public boolean hasCurrent(){
+  public boolean hasCurrent() {
     return current;
   }
 }
