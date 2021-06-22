@@ -1,4 +1,4 @@
-package com.linksync.backend.gates;
+package com.linksync.backend.gate;
 
 /**
  * This is a Nandgate implementation.

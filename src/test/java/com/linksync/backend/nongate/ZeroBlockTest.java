@@ -1,9 +1,9 @@
-package com.linksync.backend.nongates;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
+package com.linksync.backend.nongate;
 
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Testing ZeroBlock class.

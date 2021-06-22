@@ -1,6 +1,6 @@
-package com.linksync.backend.nongates;
+package com.linksync.backend.nongate;
 
-import com.linksync.backend.abstracts.AbstractLink;
+import com.linksync.backend.abstracts.AbstractConnection;
 
 /**
  * This is a OneBlock class, that returns the result true.
@@ -8,7 +8,7 @@ import com.linksync.backend.abstracts.AbstractLink;
  * @author Action
  */
 
-public class OneBlock extends AbstractLink {
+public class OneBlock extends AbstractConnection {
   @Override
   public boolean result() {
     return true;
