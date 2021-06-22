@@ -12,7 +12,7 @@ import com.linksync.backend.nongate.Line;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -178,7 +178,7 @@ public class ComponentGenerator {
   }
 
   public Component createComponent(String name) throws Exception {
-    String jsonString = Files.readAllLines(Path.of(path + "/" + name), Charset.defaultCharset()).stream()
+    String jsonString = Files.readAllLines(Path.of(path + "/" + name), StandardCharsets.UTF_8).stream()
       .collect(Collectors.joining());
     Component component = parseJsonToComponent(jsonString);
     return component;
@@ -186,7 +186,7 @@ public class ComponentGenerator {
 
   public void saveComponent(String name, Component component) throws Exception {
     String jsonComponent = component.getJson();
-    BufferedWriter writer = new BufferedWriter(new FileWriter(path + "/" + name));
+    BufferedWriter writer = new BufferedWriter(new FileWriter(path + "/" + name, StandardCharsets.UTF_8));
     writer.write(jsonComponent);
     writer.close();
   }
