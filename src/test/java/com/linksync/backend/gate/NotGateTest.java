@@ -1,13 +1,13 @@
-package com.linksync.backend.gates;
+package com.linksync.backend.gate;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.linksync.backend.nongates.OneBlock;
-import com.linksync.backend.nongates.ZeroBlock;
+import com.linksync.backend.nongate.OneBlock;
+import com.linksync.backend.nongate.ZeroBlock;
 import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Testing NotGate class.
