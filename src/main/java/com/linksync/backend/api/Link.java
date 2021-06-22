@@ -1,11 +1,11 @@
-package com.linksync.backend.interfaces;
+package com.linksync.backend.api;
 
-import com.linksync.backend.nongates.Line;
+import com.linksync.backend.nongate.Line;
+
 import java.util.List;
 
 /**
- * An interface that allows the interactions beween
- * different electronic components.
+ * Allows the orchestration of current flow.
  *
  * @author Ahmed Elhori
  */
@@ -14,10 +14,4 @@ public interface Link {
   public List<Line> getOutputs();
 
   public void propagate();
-
-  public boolean result();
-
-  public void connect(Line line);
-
-  public void disconnect(Line line);
 }
