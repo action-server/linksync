@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public interface Link {
-  public List<Line> getOutputs();
+  List<Line> getOutputs();
 
-  public void propagate();
+  void propagate();
 }
