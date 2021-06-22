@@ -1,10 +1,11 @@
-package com.linksync.backend.abstracts;
+package com.linksync.backend.api;
 
-import com.linksync.backend.tools.Line;
+import com.linksync.backend.nongate.Line;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BinaryOperator;
-import lombok.Getter;
 
 /**
  * An abstract implementation of a multi input logic gate.
@@ -33,9 +34,9 @@ public abstract class AbstractMultiGate extends AbstractLink {
 
   @Override
   public boolean result() {
-    boolean result = inputs.get(0).isCurrent();
+    boolean result = inputs.get(0).hasCurrent();
     for (int i = 1; i < inputs.size(); i++) {
-      result = function.apply(result, inputs.get(i).isCurrent());
+      result = function.apply(result, inputs.get(i).hasCurrent());
     }
     return result;
   }

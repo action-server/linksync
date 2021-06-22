@@ -3,8 +3,8 @@ package com.linksync.backend.gates;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.linksync.backend.tools.OneBlock;
-import com.linksync.backend.tools.ZeroBlock;
+import com.linksync.backend.nongates.OneBlock;
+import com.linksync.backend.nongates.ZeroBlock;
 import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
