@@ -7,3 +7,9 @@
 
 # Intellij
 /.idea/
+
+# Eclipse
+/.settings/
+/.project
+/.classpath
+/bin/

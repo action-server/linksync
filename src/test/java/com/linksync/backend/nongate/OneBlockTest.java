@@ -1,9 +1,9 @@
-package com.linksync.backend.tools;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+package com.linksync.backend.nongates;
 
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Testing OneBlock class.

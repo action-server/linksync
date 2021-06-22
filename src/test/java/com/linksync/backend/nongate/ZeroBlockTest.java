@@ -1,4 +1,4 @@
-package com.linksync.backend.tools;
+package com.linksync.backend.nongates;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

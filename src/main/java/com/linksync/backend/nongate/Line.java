@@ -1,4 +1,4 @@
-package com.linksync.backend.tools;
+package com.linksync.backend.nongates;
 
 import com.linksync.backend.interfaces.Link;
 import lombok.Getter;
@@ -11,14 +11,17 @@ import lombok.Setter;
  */
 
 public class Line {
-  @Getter
   @Setter
-  private volatile boolean current;
+  private volatile boolean current = false;
+
   @Getter
   private Link link;
 
   public Line(Link link) {
-    this.current = false;
     this.link = link;
+  }
+
+  public boolean hasCurrent(){
+    return current;
   }
 }
