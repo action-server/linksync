@@ -1,6 +1,6 @@
 package com.linksync.backend.interfaces;
 
-import com.linksync.backend.tools.Line;
+import com.linksync.backend.nongates.Line;
 import java.util.List;
 
 /**
