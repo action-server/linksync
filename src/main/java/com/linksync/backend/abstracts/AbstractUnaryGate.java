@@ -1,7 +1,9 @@
-package com.linksync.backend.api;
+package com.linksync.backend.abstracts;
 
+import com.linksync.backend.api.UnaryInput;
 import com.linksync.backend.nongate.Line;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.function.UnaryOperator;
 
@@ -10,22 +12,14 @@ import java.util.function.UnaryOperator;
  *
  * @author Action
  */
-
-@Getter
-public abstract class AbstractUnaryGate extends AbstractLink {
-  private final Line input = new Line(this);
+@RequiredArgsConstructor
+public abstract class AbstractUnaryGate extends AbstractConnection implements UnaryInput {
+  @Getter
+  private final Line input = new Line(0, this);
   private final UnaryOperator<Boolean> function;
-
-  public AbstractUnaryGate(UnaryOperator<Boolean> function) {
-    this.function = function;
-  }
 
   @Override
   public boolean result() {
     return function.apply(input.hasCurrent());
-  }
-
-  public Line getInput() {
-    return input;
   }
 }

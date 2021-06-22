@@ -1,7 +1,7 @@
-package com.linksync.backend.api;
+package com.linksync.backend.abstracts;
 
+import com.linksync.backend.api.MultiInput;
 import com.linksync.backend.nongate.Line;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,8 @@ import java.util.function.BinaryOperator;
  * @author Action
  */
 
-@Getter
-public abstract class AbstractMultiGate extends AbstractLink {
-  private final List<Line> inputs;
+public abstract class AbstractMultiGate extends AbstractConnection implements MultiInput {
+  private final List<Line> inputs = new ArrayList<>();
   private final BinaryOperator<Boolean> function;
 
   /**
@@ -25,10 +24,9 @@ public abstract class AbstractMultiGate extends AbstractLink {
    * @param function is an implementation of the BinaryOperator interface.
    */
   public AbstractMultiGate(int inputNum, BinaryOperator<Boolean> function) {
-    this.inputs = new ArrayList<>();
     this.function = function;
     for (int i = 0; i < inputNum; i++) {
-      inputs.add(new Line(this));
+      inputs.add(new Line(i, this));
     }
   }
 
@@ -41,8 +39,13 @@ public abstract class AbstractMultiGate extends AbstractLink {
     return result;
   }
 
+  @Override
   public Line getInput(int index) {
     return inputs.get(index);
   }
 
+  @Override
+  public int getInputNum() {
+    return inputs.size();
+  }
 }
