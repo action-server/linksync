@@ -9,9 +9,7 @@ import com.linksync.backend.api.UnaryInput;
 import com.linksync.backend.nongate.Component;
 import com.linksync.backend.nongate.Line;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -95,7 +93,15 @@ public class ComponentGenerator {
       outputs.put(outputIndex, (Connection) links.get(linkId));
     }
 
-    Component component = new Component(links, inputs, outputs, new ArrayList<>());
+    JsonArray jsonComponents = jsonBody.getAsJsonArray("components");
+    List<Component> components = new ArrayList<>();
+    for (JsonElement jsonComponentElement : jsonComponents) {
+      JsonObject jsonComponent = jsonComponentElement.getAsJsonObject();
+      Component component = parseJsonToComponent(jsonComponent.toString());
+      components.add(component);
+    }
+
+    Component component = new Component(links, inputs, outputs, components);
     return component;
   }
 
@@ -192,6 +198,14 @@ public class ComponentGenerator {
 
   public Component createComponent(String name) throws Exception {
     String jsonString = Files.readAllLines(Path.of(path + "/" + name), StandardCharsets.UTF_8).stream()
+      .collect(Collectors.joining());
+    Component component = parseJsonToComponent(jsonString);
+    return component;
+  }
+
+  public Component createComponentFromStram(InputStream inputStream) throws Exception {
+    String jsonString = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+      .lines()
       .collect(Collectors.joining());
     Component component = parseJsonToComponent(jsonString);
     return component;
