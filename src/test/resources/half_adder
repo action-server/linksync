@@ -1,0 +1,55 @@
+{
+  "links": [
+    {
+      "type": "xor_gate",
+      "id": 0,
+      "input_num": 2,
+      "outputs": []
+    },
+    {
+      "type": "and_gate",
+      "id": 1,
+      "input_num": 2,
+      "outputs": []
+    }
+  ],
+  "inputs": [
+    {
+      "index": "A",
+      "link_inputs": [
+        {
+          "id": 0,
+          "index": 0
+        },
+        {
+          "id": 1,
+          "index": 1
+        }
+      ]
+    },
+    {
+      "index": "B",
+      "link_inputs": [
+        {
+          "id": 0,
+          "index": 1
+        },
+        {
+          "id": 1,
+          "index": 0
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "index": "Carry",
+      "id": 1
+    },
+    {
+      "index": "Sum",
+      "id": 0
+    }
+  ],
+  "components": []
+}
