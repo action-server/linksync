@@ -12,6 +12,7 @@ public class Component {
   List<Link> links;
   Map<String, List<Line>> inputs;
   Map<String, Connection> outputs;
+  List<Component> components;
 
   public boolean connect(String index, Line line) {
     return outputs.get(index).connect(line);
