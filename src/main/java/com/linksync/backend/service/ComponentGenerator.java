@@ -95,20 +95,22 @@ public class ComponentGenerator {
       outputs.put(outputIndex, (Connection) links.get(linkId));
     }
 
-    Component component = new Component(links, inputs, outputs);
+    Component component = new Component(links, inputs, outputs, new ArrayList<>());
     return component;
   }
 
-  public static String parseComponentToJson(List<Link> links, Map<String, List<Line>> inputs, Map<String, Connection> outputs) throws Exception {
+  public static String parseComponentToJson(List<Link> links, Map<String, List<Line>> inputs, Map<String, Connection> outputs, List<Component> components) throws Exception {
     JsonObject jsonBody = new JsonObject();
 
     JsonArray jsonLinks = JsonParser.parseString(parseLinksToJson(links)).getAsJsonArray();
     JsonArray jsonComponentInputs = JsonParser.parseString(parseInputsToJson(links, inputs)).getAsJsonArray();
     JsonArray jsonComponentOutputs = JsonParser.parseString(parseOutputsToJson(links, outputs)).getAsJsonArray();
+    JsonArray jsonComponentComponents = JsonParser.parseString(parseComponentsToJson(links, components)).getAsJsonArray();
 
     jsonBody.add("links", jsonLinks);
     jsonBody.add("inputs", jsonComponentInputs);
     jsonBody.add("outputs", jsonComponentOutputs);
+    jsonBody.add("components", jsonComponentComponents);
 
     return gson.toJson(jsonBody);
   }
@@ -170,6 +172,17 @@ public class ComponentGenerator {
     return jsonComponentOutputs.toString();
   }
 
+  private static String parseComponentsToJson(List<Link> links, List<Component> components) throws Exception {
+    JsonArray jsonComponentComponents = new JsonArray();
+    for (Component component : components) {
+      JsonObject jsonComponentComponent = JsonParser
+        .parseString(parseComponentToJson(component.getLinks(),component.getInputs(), component.getOutputs(), component.getComponents()))
+        .getAsJsonObject();
+      jsonComponentComponents.add(jsonComponentComponent);
+    }
+    return jsonComponentComponents.toString();
+  }
+
   public void prepareEnv() throws IOException {
     Path dirPath = Path.of(path);
     if (!Files.isDirectory(dirPath)) {
@@ -185,7 +198,7 @@ public class ComponentGenerator {
   }
 
   public void saveComponent(String name, Component component) throws Exception {
-    String jsonComponent = parseComponentToJson(component.getLinks(), component.getInputs(), component.getOutputs());
+    String jsonComponent = parseComponentToJson(component.getLinks(), component.getInputs(), component.getOutputs(), component.getComponents());
     BufferedWriter writer = new BufferedWriter(new FileWriter(path + "/" + name, StandardCharsets.UTF_8));
     writer.write(jsonComponent);
     writer.close();
