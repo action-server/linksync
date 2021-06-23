@@ -66,7 +66,7 @@ public class ComponentGeneratorTest {
   public void halfAdderCreateComponentTest() throws Exception {
     halfAdderSaveComponentTest();
     Component halfAdder = generator.createComponent("half_adder");
-    LinkSync linkSync = new LinkSync(new ArrayList<>());
+    LinkSync linkSync = new LinkSync(new ArrayList<>(), new ArrayList<>());
     OneBlock oneBlock = new OneBlock();
     Display sumDisplay = new Display();
     Display carryDisplay = new Display();
@@ -76,7 +76,7 @@ public class ComponentGeneratorTest {
     halfAdder.connect("Carry", carryDisplay.getInput());
     linkSync.followLink(oneBlock);
 
-    while (!linkSync.runBatch().isEmpty());
+    while (linkSync.start());
 
     assertEquals(sumDisplay.result(), false);
     assertEquals(carryDisplay.result(), true);
