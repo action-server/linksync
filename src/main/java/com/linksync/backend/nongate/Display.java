@@ -14,11 +14,9 @@ public class Display implements Link, UnaryInput {
   private final Line input = new Line(0, this);
 
   @Override
-  public void propagate() {
-    return;
-  }
+  public void propagate() {}
 
-  public boolean output() {
+  public boolean result() {
     return input.hasCurrent();
   }
 }

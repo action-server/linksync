@@ -1,6 +1,7 @@
 package com.linksync.backend.nongate;
 
 import com.linksync.backend.api.Link;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -12,13 +13,18 @@ import lombok.Setter;
  */
 
 @RequiredArgsConstructor
+@Getter
 public class Line {
-  @Getter
   private final int index;
-  @Getter
   private final Link link;
+
+  // Disable lombok generating isCurrent as method name
+  @Getter(AccessLevel.NONE)
   @Setter
-  private volatile boolean current = false;
+  private volatile boolean current;
+
+  @Setter
+  private volatile boolean connected;
 
   public boolean hasCurrent() {
     return current;
