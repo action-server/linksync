@@ -1,12 +1,13 @@
-package com.linksync.backend;
+package com.linksync.backend.service;
 
 import com.linksync.backend.api.Connection;
 import com.linksync.backend.api.Link;
 import com.linksync.backend.gate.AndGate;
 import com.linksync.backend.gate.XorGate;
-import com.linksync.backend.nongate.*;
-import com.linksync.backend.service.ComponentGenerator;
-import com.linksync.backend.service.LinkSync;
+import com.linksync.backend.nongate.Component;
+import com.linksync.backend.nongate.Display;
+import com.linksync.backend.nongate.Line;
+import com.linksync.backend.nongate.OneBlock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -53,7 +54,7 @@ public class ComponentGeneratorTest {
     inputs.put("B", List.of(xorGate.getInput(1), andGate.getInput(0)));
     outputs.put("Sum", xorGate);
     outputs.put("Carry", andGate);
-    Component halfAdder = new Component(links, inputs, outputs);
+    Component halfAdder = new Component(links, inputs, outputs, new ArrayList<>());
 
     generator.saveComponent("half_adder", halfAdder);
 
@@ -77,7 +78,7 @@ public class ComponentGeneratorTest {
 
     while (!linkSync.runBatch().isEmpty());
 
-    assertEquals(sumDisplay.output(), false);
-    assertEquals(carryDisplay.output(), true);
+    assertEquals(sumDisplay.result(), false);
+    assertEquals(carryDisplay.result(), true);
   }
 }
