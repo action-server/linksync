@@ -185,7 +185,7 @@ public class ComponentGenerator {
   }
 
   public void saveComponent(String name, Component component) throws Exception {
-    String jsonComponent = component.getJson();
+    String jsonComponent = parseComponentToJson(component.getLinks(), component.getInputs(), component.getOutputs());
     BufferedWriter writer = new BufferedWriter(new FileWriter(path + "/" + name, StandardCharsets.UTF_8));
     writer.write(jsonComponent);
     writer.close();

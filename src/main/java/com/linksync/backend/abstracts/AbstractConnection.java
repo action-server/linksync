@@ -1,7 +1,7 @@
 package com.linksync.backend.abstracts;
 
-import com.linksync.backend.api.Connection;
 import com.linksync.backend.api.Link;
+import com.linksync.backend.api.Connection;
 import com.linksync.backend.nongate.Line;
 import lombok.Getter;
 
@@ -25,13 +25,23 @@ public abstract class AbstractConnection implements Link, Connection {
   }
 
   @Override
-  public void connect(Line line) {
+  public boolean connect(Line line) {
+    if(line.isConnected()){
+      return false;
+    }
     outputs.add(line);
+    line.setConnected(true);
+    return true;
   }
 
   @Override
-  public void disconnect(Line line) {
+  public boolean disconnect(Line line) {
+    if(!line.isConnected()){
+      return false;
+    }
     outputs.remove(line);
+    line.setConnected(false);
+    return true;
   }
 
   public abstract boolean result();
