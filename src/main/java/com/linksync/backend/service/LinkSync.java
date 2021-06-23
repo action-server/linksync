@@ -2,6 +2,7 @@ package com.linksync.backend.service;
 
 import com.linksync.backend.api.Link;
 import com.linksync.backend.nongate.Line;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -10,27 +11,36 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class LinkSync {
-  private final List<Link> links;
+  private final List<Link> startLinks;
+  private final List<Link> ongoingLinks;
+  @Getter
+  private static int propagationTime;
 
   public void followLink(Link link) {
-    links.add(link);
+    startLinks.add(link);
+    ongoingLinks.add(link);
   }
 
-  public List<Link> runBatch() {
-    if (links.isEmpty()) {
-      return links;
+  public void unfollowLink(Link link) {
+    startLinks.remove(link);
+    ongoingLinks.add(link);
+  }
+
+  public boolean start() {
+    if(ongoingLinks.isEmpty()){
+      ongoingLinks.addAll(startLinks);
+      return false;
     }
-    List<Link> oldLinks = new ArrayList<>();
     List<Link> newLinks = new ArrayList<>();
-    for (Link link : links) {
+    for (Link link : ongoingLinks) {
       link.propagate();
       newLinks.addAll(link.getOutputs().stream()
         .map(Line::getLink)
         .collect(Collectors.toList()));
     }
-    oldLinks.addAll(links);
-    links.clear();
-    links.addAll(newLinks);
-    return oldLinks;
+    ongoingLinks.clear();
+    ongoingLinks.addAll(newLinks);
+    propagationTime++;
+    return true;
   }
 }
