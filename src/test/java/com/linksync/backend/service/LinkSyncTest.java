@@ -25,7 +25,7 @@ public class LinkSyncTest {
   }
 
   @Test
-  public void halfAdderTest() {
+  public void halfAdderTest(){
     Component halfAdder = createHalfAdder();
     ZeroBlock zeroBlock = new ZeroBlock();
     OneBlock oneBlock = new OneBlock();
@@ -66,11 +66,8 @@ public class LinkSyncTest {
   }
 
   @Test
-  public void fullAdderTest() throws Exception {
+  public void fullAdderTest(){
     Component fullAdder = createFullAdder();
-    ComponentGenerator generator = new ComponentGenerator("/home/action");
-    generator.prepareEnv();
-    generator.saveComponent("full_adder", fullAdder);
     ZeroBlock zeroBlock = new ZeroBlock();
     OneBlock oneBlock = new OneBlock();
 
