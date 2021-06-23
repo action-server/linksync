@@ -17,12 +17,12 @@ public class LinkSyncTest {
 
   @BeforeEach
   public void setup() {
-    linkSync = new LinkSync(new ArrayList<>());
+    linkSync = new LinkSync(new ArrayList<>(), new ArrayList<>());
   }
 
   @Test
   public void halfAdderTest() throws Exception {
-    Component halfAdder = createHalfAdder();
+    Component halfAdder = createComponent("half_adder");
     ZeroBlock zeroBlock = new ZeroBlock();
     OneBlock oneBlock = new OneBlock();
 
@@ -48,7 +48,7 @@ public class LinkSyncTest {
         halfAdder.connect(outputColumn[j], display.getInput());
         linkSync.followLink(oneBlock);
         linkSync.followLink(zeroBlock);
-        while (!linkSync.runBatch().isEmpty());
+        while (linkSync.start());
         assertEquals(truthtable[i][inputColumn.length+j], display.result());
       }
       for(int j = 0; j<inputColumn.length; j++){
@@ -63,7 +63,7 @@ public class LinkSyncTest {
 
   @Test
   public void fullAdderTest() throws Exception {
-    Component fullAdder = createFullAdder();
+    Component fullAdder = createComponent("full_adder");
     ZeroBlock zeroBlock = new ZeroBlock();
     OneBlock oneBlock = new OneBlock();
 
@@ -93,7 +93,7 @@ public class LinkSyncTest {
         fullAdder.connect(outputColumn[j], display.getInput());
         linkSync.followLink(oneBlock);
         linkSync.followLink(zeroBlock);
-        while (!linkSync.runBatch().isEmpty());
+        while(linkSync.start());
         assertEquals(truthtable[i][inputColumn.length+j], display.result());
       }
       for(int j = 0; j<inputColumn.length; j++){
@@ -104,19 +104,12 @@ public class LinkSyncTest {
         }
       }
     }
-}
-
-  private Component createHalfAdder() throws Exception {
-    InputStream inputStream = getClass().getClassLoader().getResourceAsStream("half_adder");
-    ComponentGenerator componentGenerator = new ComponentGenerator("");
-    Component halfAdder = componentGenerator.createComponentFromStram(inputStream);
-    return halfAdder;
   }
 
-  private Component createFullAdder() throws Exception {
-    InputStream inputStream = getClass().getClassLoader().getResourceAsStream("full_adder");
+  private Component createComponent(String componentName) throws Exception{
+    InputStream inputStream = getClass().getClassLoader().getResourceAsStream(componentName);
     ComponentGenerator componentGenerator = new ComponentGenerator("");
-    Component fullAdder = componentGenerator.createComponentFromStram(inputStream);
-    return fullAdder;
+    Component component = componentGenerator.createComponentFromStram(inputStream);
+    return component;
   }
 }
