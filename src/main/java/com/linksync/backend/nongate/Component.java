@@ -1,32 +1,31 @@
 package com.linksync.backend.nongate;
 
-import com.linksync.backend.api.Connection;
 import com.linksync.backend.api.Link;
-import com.linksync.backend.service.ComponentGenerator;
-import lombok.RequiredArgsConstructor;
+import com.linksync.backend.api.Connection;
+import lombok.Value;
 
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
+@Value
 public class Component {
-  private final List<Link> links;
-  private final Map<String, List<Line>> inputs;
-  private final Map<String, Connection> outputs;
+  List<Link> links;
+  Map<String, List<Line>> inputs;
+  Map<String, Connection> outputs;
 
-  public void connect(String index, Line line) {
-    outputs.get(index).connect(line);
+  public boolean connect(String index, Line line) {
+    return outputs.get(index).connect(line);
   }
 
-  public void disconnect(String index, Line line) {
-    outputs.get(index).disconnect(line);
+  public boolean disconnect(String index, Line line) {
+    return outputs.get(index).disconnect(line);
   }
 
   public List<Line> getInputs(String index) {
     return inputs.get(index);
   }
 
-  public String getJson() throws Exception {
-    return ComponentGenerator.parseComponentToJson(links, inputs, outputs);
+  public Connection getOutput(String index) {
+    return outputs.get(index);
   }
 }

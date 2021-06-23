@@ -9,7 +9,7 @@ import com.linksync.backend.nongate.Line;
  */
 
 public interface Connection {
-  void connect(Line line);
+  boolean connect(Line line);
 
-  void disconnect(Line line);
+  boolean disconnect(Line line);
 }
