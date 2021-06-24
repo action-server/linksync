@@ -9,19 +9,25 @@ import java.util.List;
 
 public class Clock extends AbstractConnection {
   @Getter
-  private final int rate;
+  private final int delay;
   private boolean on;
   private final List<Line> outputs;
+  private final LinkSync linkSync;
 
-  private Clock(int rate, List<Line> outputs){
-    super(outputs);
-    this.rate=rate;
+  private Clock(int delay, List<Line> outputs, LinkSync linkSync){
+    super(outputs, linkSync);
+    this.delay =delay;
     this.outputs=outputs;
-    LinkSync.followLink(this);
+    this.linkSync=linkSync;
+    linkSync.followLink(this);
   }
 
-  public static Clock create(int rate){
-    return new Clock(rate, new ArrayList<>());
+  public static Clock create(int delay){
+    return new Clock(delay, new ArrayList<>(), LinkSync.getDefault());
+  }
+
+  public static Clock create(int delay, LinkSync linkSync) {
+    return new Clock(delay, new ArrayList<>(), linkSync);
   }
 
   @Override
@@ -30,9 +36,15 @@ public class Clock extends AbstractConnection {
   }
 
   public boolean result() {
-    if(LinkSync.getPropagationTime()%rate == 0){
+    if(linkSync.getPropagationTime()% delay == 0){
       on=!on;
     }
     return on;
+  }
+
+  public void trigger() {
+    if(linkSync.getPropagationTime()% delay == 0){
+      linkSync.trigger(this);
+    }
   }
 }

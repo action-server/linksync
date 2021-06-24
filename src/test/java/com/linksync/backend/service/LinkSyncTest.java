@@ -39,7 +39,7 @@ public class LinkSyncTest {
       for(int j = 0; j<outputColumn.length; j++) {
         Display display = Display.create();
         halfAdder.connect(outputColumn[j], display.getInput());
-        while (LinkSync.start());
+        while (LinkSync.getDefault().start());
         assertEquals(truthtable[i][inputColumn.length+j], display.result());
       }
       for(int j = 0; j<inputColumn.length; j++){
@@ -82,7 +82,7 @@ public class LinkSyncTest {
       for(int j = 0; j<outputColumn.length; j++) {
         Display display = Display.create();
         fullAdder.connect(outputColumn[j], display.getInput());
-        while(LinkSync.start());
+        while(LinkSync.getDefault().start());
         assertEquals(truthtable[i][inputColumn.length+j], display.result());
       }
       for(int j = 0; j<inputColumn.length; j++){

@@ -20,6 +20,7 @@ import java.util.List;
 public abstract class AbstractConnection implements Link, Connection {
   @Getter
   private final List<Line> outputs;
+  private final LinkSync linkSync;
 
   @Override
   public boolean connect(Line line) {
@@ -28,7 +29,7 @@ public abstract class AbstractConnection implements Link, Connection {
     }
     outputs.add(line);
     line.setConnected(true);
-    LinkSync.unfollowLink(line.getLink());
+    linkSync.unfollowLink(line.getLink());
     return true;
   }
 
@@ -39,7 +40,8 @@ public abstract class AbstractConnection implements Link, Connection {
     }
     outputs.remove(line);
     line.setConnected(false);
-    LinkSync.followLink(line.getLink());
+    line.setCurrent(false);
+    linkSync.followLink(line.getLink());
     return true;
   }
 }
