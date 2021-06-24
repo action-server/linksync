@@ -2,6 +2,7 @@ package com.linksync.backend.gate;
 
 import com.linksync.backend.abstracts.AbstractMultiInputGate;
 import com.linksync.backend.nongate.Line;
+import com.linksync.backend.service.LinkSync;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,12 @@ import java.util.List;
  */
 
 public class NandGate extends AbstractMultiInputGate {
-  private NandGate(int inputNum, List<Line> outputs) {
-    super(inputNum, outputs,(a, b) -> !(a & b));
+  private NandGate(int inputNum, List<Line> outputs, LinkSync linkSync) {
+    super(inputNum, outputs,(a, b) -> !(a & b), linkSync);
   }
 
   public static NandGate create(int inputNum){
-    return new NandGate(inputNum, new ArrayList<>());
+    return new NandGate(inputNum, new ArrayList<>(), LinkSync.getDefault());
   }
 
   public static NandGate create(){

@@ -73,9 +73,9 @@ public class ComponentGeneratorTest {
     halfAdder.getInputs("B").forEach(oneBlock::connect);
     halfAdder.connect("Sum", sumDisplay.getInput());
     halfAdder.connect("Carry", carryDisplay.getInput());
-    LinkSync.followLink(oneBlock);
+    LinkSync.getDefault().followLink(oneBlock);
 
-    while (LinkSync.start());
+    while (LinkSync.getDefault().start());
 
     assertEquals(sumDisplay.result(), false);
     assertEquals(carryDisplay.result(), true);
