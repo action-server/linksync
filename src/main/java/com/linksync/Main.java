@@ -9,8 +9,4 @@ package com.linksync;
 public class Main {
   public static void main(String[] args) {
   }
-
-  public String greeting() {
-    return "App is running";
-  }
 }

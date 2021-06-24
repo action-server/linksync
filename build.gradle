@@ -3,7 +3,6 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id "io.freefair.lombok" version "6.0.0-m2"
     id 'checkstyle'
-    id 'pmd'
     id 'com.github.spotbugs' version '4.7.1'
 }
 
@@ -15,6 +14,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.google.code.gson:gson:2.8.7'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 }
@@ -31,18 +32,11 @@ java {
 
 javafx {
     version = "16"
-    modules = ['javafx.controls']
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 checkstyle {
     toolVersion = "8.42"
-}
-
-pmd {
-    consoleOutput = true
-    toolVersion = "6.34.0"
-    rulesMinimumPriority = 5
-    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
 }
 
 spotbugs {
@@ -53,5 +47,3 @@ spotbugs {
 test {
     useJUnitPlatform()
 }
-
-defaultTasks 'clean', 'build', 'test', 'run'
