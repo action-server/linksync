@@ -7,7 +7,6 @@ plugins {
 }
 
 group 'com.linksync'
-version '0.0.0'
 
 repositories {
     mavenCentral()
