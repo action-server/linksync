@@ -15,7 +15,7 @@ import java.util.List;
 
 public class NorGate extends AbstractMultiInputGate {
   private NorGate(int inputNum, List<Line> outputs, LinkSync linkSync) {
-    super(inputNum, outputs, (a, b) -> !(a | b), linkSync);
+    super(inputNum, outputs, (a, b) -> a | b, linkSync);
   }
 
   public static NorGate create(int inputNum){
@@ -24,5 +24,10 @@ public class NorGate extends AbstractMultiInputGate {
 
   public static NorGate create(){
     return create(2);
+  }
+
+  @Override
+  public boolean result() {
+    return !super.result();
   }
 }
