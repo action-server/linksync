@@ -21,19 +21,18 @@ public class ClockTest {
     Clock clock = Clock.create(4, linkSync);
     clock.connect(display.getInput());
     linkSync.start();
-    assertTrue(display.result(), "Should be true");
+    assertFalse(display.result(), "Should be false");
   }
 
   @Test
   public void testClock2() {
     Display display = Display.create();
-    Clock clock = Clock.create(4, linkSync);
+    int delay = 4;
+    Clock clock = Clock.create(delay, linkSync);
     clock.connect(display.getInput());
-    linkSync.start();
-    linkSync.start();
-    linkSync.start();
-    linkSync.start();
-    linkSync.start();
-    assertFalse(display.result(), "Should be false");
+    for (int i = 0; i <delay+1; i++) {
+      linkSync.start();
+    }
+    assertTrue(display.result(), "Should be true");
   }
 }
