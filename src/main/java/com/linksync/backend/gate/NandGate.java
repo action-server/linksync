@@ -15,7 +15,7 @@ import java.util.List;
 
 public class NandGate extends AbstractMultiInputGate {
   private NandGate(int inputNum, List<Line> outputs, LinkSync linkSync) {
-    super(inputNum, outputs,(a, b) -> !(a & b), linkSync);
+    super(inputNum, outputs,(a, b) -> a & b, linkSync);
   }
 
   public static NandGate create(int inputNum){
@@ -24,5 +24,10 @@ public class NandGate extends AbstractMultiInputGate {
 
   public static NandGate create(){
     return create(2);
+  }
+
+  @Override
+  public boolean result() {
+    return !super.result();
   }
 }
