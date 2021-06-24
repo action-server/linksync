@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class ZeroBlockTest {
   @Test
   public void testResultFalse() {
-    ZeroBlock zeroBlock = new ZeroBlock();
+    ZeroBlock zeroBlock = ZeroBlock.create();
     assertFalse(zeroBlock.result(), "Should be false");
   }
 }

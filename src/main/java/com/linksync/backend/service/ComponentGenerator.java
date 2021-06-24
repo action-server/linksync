@@ -1,7 +1,7 @@
 package com.linksync.backend.service;
 
 import com.google.gson.*;
-import com.linksync.backend.abstracts.AbstractMultiGate;
+import com.linksync.backend.abstracts.AbstractMultiInputGate;
 import com.linksync.backend.api.Connection;
 import com.linksync.backend.api.Link;
 import com.linksync.backend.api.MultiInput;
@@ -128,8 +128,8 @@ public class ComponentGenerator {
       jsonLink.addProperty("type", JsonLinkTranslator.getLinkName(link));
       jsonLink.addProperty("id", links.indexOf(link));
       int inputNum = 0;
-      if (link instanceof AbstractMultiGate) {
-        inputNum = ((AbstractMultiGate) link).getInputNum();
+      if (link instanceof AbstractMultiInputGate) {
+        inputNum = ((AbstractMultiInputGate) link).getInputNum();
       }
       jsonLink.addProperty("input_num", inputNum);
       JsonArray jsonOutputs = new JsonArray();

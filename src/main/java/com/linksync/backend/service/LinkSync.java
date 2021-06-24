@@ -3,30 +3,28 @@ package com.linksync.backend.service;
 import com.linksync.backend.api.Link;
 import com.linksync.backend.nongate.Line;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
 public class LinkSync {
-  private final List<Link> startLinks;
-  private final List<Link> ongoingLinks;
+  private static final List<Link> startLinks=new ArrayList<>();
+  private static final List<Link> ongoingLinks=new ArrayList<>();
   @Getter
   private static int propagationTime;
 
-  public void followLink(Link link) {
+  public static void followLink(Link link) {
     startLinks.add(link);
     ongoingLinks.add(link);
   }
 
-  public void unfollowLink(Link link) {
+  public static void unfollowLink(Link link) {
     startLinks.remove(link);
     ongoingLinks.add(link);
   }
 
-  public boolean start() {
+  public static boolean start() {
     if(ongoingLinks.isEmpty()){
       ongoingLinks.addAll(startLinks);
       return false;

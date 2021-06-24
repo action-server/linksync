@@ -14,7 +14,7 @@ import java.util.function.BinaryOperator;
  * @author Action
  */
 
-public abstract class AbstractMultiGate extends AbstractConnection implements MultiInput {
+public abstract class AbstractMultiInputGate extends AbstractConnection implements MultiInput {
   private final List<Line> inputs;
   private final List<Line> outputs;
   private final BinaryOperator<Boolean> function;
@@ -26,7 +26,7 @@ public abstract class AbstractMultiGate extends AbstractConnection implements Mu
    * @param outputs is a list of output lines.
    * @param function is an implementation of the BinaryOperator interface.
    */
-  public AbstractMultiGate(int inputNum, List<Line> outputs, BinaryOperator<Boolean> function) {
+  public AbstractMultiInputGate(int inputNum, List<Line> outputs, BinaryOperator<Boolean> function) {
     super(outputs);
     this.inputs=new ArrayList<>();
     this.outputs=outputs;

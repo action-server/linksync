@@ -13,13 +13,13 @@ import java.util.function.UnaryOperator;
  *
  * @author Action
  */
-public abstract class AbstractUnaryGate extends AbstractConnection implements UnaryInput {
+public abstract class AbstractUnaryInputGate extends AbstractConnection implements UnaryInput {
   @Getter
   private final Line input = new Line(this);
   private final List<Line> outputs;
   private final UnaryOperator<Boolean> function;
 
-  public AbstractUnaryGate(List<Line> outputs, UnaryOperator<Boolean> function) {
+  public AbstractUnaryInputGate(List<Line> outputs, UnaryOperator<Boolean> function) {
     super(outputs);
     this.outputs=outputs;
     this.function=function;

@@ -4,27 +4,20 @@ import com.linksync.backend.nongate.Component;
 import com.linksync.backend.nongate.Display;
 import com.linksync.backend.nongate.OneBlock;
 import com.linksync.backend.nongate.ZeroBlock;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LinkSyncTest {
   private LinkSync linkSync;
 
-  @BeforeEach
-  public void setup() {
-    linkSync = new LinkSync(new ArrayList<>(), new ArrayList<>());
-  }
-
   @Test
   public void halfAdderTest() throws Exception {
     Component halfAdder = createComponent("half_adder");
-    ZeroBlock zeroBlock = new ZeroBlock();
-    OneBlock oneBlock = new OneBlock();
+    ZeroBlock zeroBlock = ZeroBlock.create();
+    OneBlock oneBlock = OneBlock.create();
 
     boolean[][] truthtable =
       {{false, false, false, false},
@@ -44,11 +37,9 @@ public class LinkSyncTest {
         }
       }
       for(int j = 0; j<outputColumn.length; j++) {
-        Display display = new Display();
+        Display display = Display.create();
         halfAdder.connect(outputColumn[j], display.getInput());
-        linkSync.followLink(oneBlock);
-        linkSync.followLink(zeroBlock);
-        while (linkSync.start());
+        while (LinkSync.start());
         assertEquals(truthtable[i][inputColumn.length+j], display.result());
       }
       for(int j = 0; j<inputColumn.length; j++){
@@ -64,8 +55,8 @@ public class LinkSyncTest {
   @Test
   public void fullAdderTest() throws Exception {
     Component fullAdder = createComponent("full_adder");
-    ZeroBlock zeroBlock = new ZeroBlock();
-    OneBlock oneBlock = new OneBlock();
+    ZeroBlock zeroBlock = ZeroBlock.create();
+    OneBlock oneBlock = OneBlock.create();
 
     boolean[][] truthtable =
       {{false, false, false, false, false},
@@ -89,11 +80,9 @@ public class LinkSyncTest {
         }
       }
       for(int j = 0; j<outputColumn.length; j++) {
-        Display display = new Display();
+        Display display = Display.create();
         fullAdder.connect(outputColumn[j], display.getInput());
-        linkSync.followLink(oneBlock);
-        linkSync.followLink(zeroBlock);
-        while(linkSync.start());
+        while(LinkSync.start());
         assertEquals(truthtable[i][inputColumn.length+j], display.result());
       }
       for(int j = 0; j<inputColumn.length; j++){

@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OneBlockTest {
   @Test
   public void testResultTrue() {
-    OneBlock oneBlock = new OneBlock();
+    OneBlock oneBlock = OneBlock.create();
     assertTrue(oneBlock.result(), "Should be true");
   }
 }
