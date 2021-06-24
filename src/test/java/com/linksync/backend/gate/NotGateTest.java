@@ -26,9 +26,9 @@ public class NotGateTest {
    */
   @BeforeEach
   public void init() {
-    zeroBlock = new ZeroBlock();
-    oneBlock = new OneBlock();
-    notGate = new NotGate();
+    zeroBlock = ZeroBlock.create();
+    oneBlock = OneBlock.create();
+    notGate = NotGate.create();
   }
 
   @Test

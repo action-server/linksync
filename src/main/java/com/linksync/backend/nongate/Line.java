@@ -26,6 +26,11 @@ public class Line {
   @Setter
   private volatile boolean connected;
 
+  public Line(Link link){
+    this.link=link;
+    this.index=0;
+  }
+
   public boolean hasCurrent() {
     return current;
   }

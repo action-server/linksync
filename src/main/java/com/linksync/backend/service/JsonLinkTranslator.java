@@ -9,19 +9,19 @@ public class JsonLinkTranslator {
   public static Link createLinkInstance(int input, String linkClassName) throws Exception {
     switch (linkClassName) {
       case "and_gate":
-        return new AndGate(input);
+        return AndGate.create(input);
       case "nand_gate":
-        return new NandGate(input);
+        return NandGate.create(input);
       case "or_gate":
-        return new OrGate(input);
+        return OrGate.create(input);
       case "nor_gate":
-        return new NorGate(input);
+        return NorGate.create(input);
       case "xor_gate":
-        return new XorGate(input);
+        return XorGate.create(input);
       case "zero_block":
-        return new ZeroBlock();
+        return ZeroBlock.create();
       case "one_block":
-        return new OneBlock();
+        return OneBlock.create();
     }
     throw new Exception("Link class not found");
   }

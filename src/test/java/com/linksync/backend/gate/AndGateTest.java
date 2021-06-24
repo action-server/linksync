@@ -29,11 +29,11 @@ public class AndGateTest {
    */
   @BeforeEach
   public void init() {
-    zeroBlock0 = new ZeroBlock();
-    zeroBlock1 = new ZeroBlock();
-    oneBlock0 = new OneBlock();
-    oneBlock1 = new OneBlock();
-    andGate = new AndGate(2);
+    zeroBlock0 = ZeroBlock.create();
+    zeroBlock1 = ZeroBlock.create();
+    oneBlock0 = OneBlock.create();
+    oneBlock1 = OneBlock.create();
+    andGate = AndGate.create();
   }
 
   @Test

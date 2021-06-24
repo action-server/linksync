@@ -1,11 +1,12 @@
 package com.linksync.backend.abstracts;
 
-import com.linksync.backend.api.Link;
 import com.linksync.backend.api.Connection;
+import com.linksync.backend.api.Link;
 import com.linksync.backend.nongate.Line;
+import com.linksync.backend.service.LinkSync;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,14 +16,10 @@ import java.util.List;
  * @author Ahmed Elhori
  */
 
+@RequiredArgsConstructor
 public abstract class AbstractConnection implements Link, Connection {
   @Getter
-  private final List<Line> outputs = new ArrayList<>();
-
-  @Override
-  public void propagate() {
-    outputs.forEach(x -> x.setCurrent(result()));
-  }
+  private final List<Line> outputs;
 
   @Override
   public boolean connect(Line line) {
@@ -31,6 +28,7 @@ public abstract class AbstractConnection implements Link, Connection {
     }
     outputs.add(line);
     line.setConnected(true);
+    LinkSync.unfollowLink(line.getLink());
     return true;
   }
 
@@ -41,8 +39,7 @@ public abstract class AbstractConnection implements Link, Connection {
     }
     outputs.remove(line);
     line.setConnected(false);
+    LinkSync.followLink(line.getLink());
     return true;
   }
-
-  public abstract boolean result();
 }

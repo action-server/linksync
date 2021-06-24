@@ -1,18 +1,27 @@
 package com.linksync.backend.gate;
 
+import com.linksync.backend.abstracts.AbstractMultiInputGate;
+import com.linksync.backend.nongate.Line;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is a NorGate implementation.
  *
  * @author ahmed elhori
  */
 
-public class NorGate extends OrGate {
-  public NorGate(int inputNum) {
-    super(inputNum);
+public class NorGate extends AbstractMultiInputGate {
+  private NorGate(int inputNum, List<Line> outputs) {
+    super(inputNum, outputs, (a, b) -> !(a | b));
   }
 
-  @Override
-  public boolean result() {
-    return !super.result();
+  public static NorGate create(int inputNum){
+    return new NorGate(inputNum, new ArrayList<>());
+  }
+
+  public static NorGate create(){
+    return create(2);
   }
 }

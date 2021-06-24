@@ -43,8 +43,8 @@ public class ComponentGeneratorTest {
 
   @Test
   public void halfAdderSaveComponentTest() throws Exception {
-    XorGate xorGate = new XorGate(2);
-    AndGate andGate = new AndGate(2);
+    XorGate xorGate = XorGate.create();
+    AndGate andGate = AndGate.create();
     List<Link> links = new ArrayList<>();
     Map<String, List<Line>> inputs = new HashMap<>();
     Map<String, Connection> outputs = new HashMap<>();
@@ -66,17 +66,16 @@ public class ComponentGeneratorTest {
   public void halfAdderCreateComponentTest() throws Exception {
     halfAdderSaveComponentTest();
     Component halfAdder = generator.createComponent("half_adder");
-    LinkSync linkSync = new LinkSync(new ArrayList<>(), new ArrayList<>());
-    OneBlock oneBlock = new OneBlock();
-    Display sumDisplay = new Display();
-    Display carryDisplay = new Display();
+    OneBlock oneBlock = OneBlock.create();
+    Display sumDisplay = Display.create();
+    Display carryDisplay = Display.create();
     halfAdder.getInputs("A").forEach(oneBlock::connect);
     halfAdder.getInputs("B").forEach(oneBlock::connect);
     halfAdder.connect("Sum", sumDisplay.getInput());
     halfAdder.connect("Carry", carryDisplay.getInput());
-    linkSync.followLink(oneBlock);
+    LinkSync.followLink(oneBlock);
 
-    while (linkSync.start());
+    while (LinkSync.start());
 
     assertEquals(sumDisplay.result(), false);
     assertEquals(carryDisplay.result(), true);
