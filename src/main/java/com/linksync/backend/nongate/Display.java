@@ -11,7 +11,13 @@ public class Display implements Link, UnaryInput {
   @Getter
   private final List<Line> outputs = new ArrayList<>();
   @Getter
-  private final Line input = new Line(0, this);
+  private final Line input = new Line( this);
+
+  private Display(){}
+
+  public static Display create(){
+    return new Display();
+  }
 
   @Override
   public void propagate() {}
