@@ -15,14 +15,14 @@ import java.util.List;
 public class OneBlock extends AbstractConnection {
   private final List<Line> outputs;
 
-  private OneBlock(List<Line> outputs){
-    super(outputs);
+  private OneBlock(List<Line> outputs, LinkSync linkSync){
+    super(outputs, linkSync);
     this.outputs=outputs;
-    LinkSync.followLink(this);
+    linkSync.followLink(this);
   }
 
   public static OneBlock create(){
-    return new OneBlock(new ArrayList<>());
+    return new OneBlock(new ArrayList<>(), LinkSync.getDefault());
   }
 
   @Override

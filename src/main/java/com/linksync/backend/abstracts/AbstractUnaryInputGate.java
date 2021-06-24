@@ -19,11 +19,11 @@ public abstract class AbstractUnaryInputGate extends AbstractConnection implemen
   private final List<Line> outputs;
   private final UnaryOperator<Boolean> function;
 
-  public AbstractUnaryInputGate(List<Line> outputs, UnaryOperator<Boolean> function) {
-    super(outputs);
+  public AbstractUnaryInputGate(List<Line> outputs, UnaryOperator<Boolean> function, LinkSync linkSync) {
+    super(outputs, linkSync);
     this.outputs=outputs;
     this.function=function;
-    LinkSync.followLink(this);
+    linkSync.followLink(this);
   }
 
   @Override

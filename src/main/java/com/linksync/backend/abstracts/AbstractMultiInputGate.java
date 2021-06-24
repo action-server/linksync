@@ -26,15 +26,15 @@ public abstract class AbstractMultiInputGate extends AbstractConnection implemen
    * @param outputs is a list of output lines.
    * @param function is an implementation of the BinaryOperator interface.
    */
-  public AbstractMultiInputGate(int inputNum, List<Line> outputs, BinaryOperator<Boolean> function) {
-    super(outputs);
+  public AbstractMultiInputGate(int inputNum, List<Line> outputs, BinaryOperator<Boolean> function, LinkSync linkSync) {
+    super(outputs, linkSync);
     this.inputs=new ArrayList<>();
     this.outputs=outputs;
     this.function = function;
     for (int i = 0; i < inputNum; i++) {
       inputs.add(new Line(i, this));
     }
-    LinkSync.followLink(this);
+    LinkSync.getDefault().followLink(this);
   }
 
   @Override

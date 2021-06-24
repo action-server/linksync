@@ -15,14 +15,14 @@ import java.util.List;
 public class ZeroBlock extends AbstractConnection {
   private final List<Line> outputs;
 
-  private ZeroBlock(List<Line> outputs){
-    super(outputs);
+  private ZeroBlock(List<Line> outputs, LinkSync linkSync){
+    super(outputs, linkSync);
     this.outputs=outputs;
-    LinkSync.followLink(this);
+    linkSync.followLink(this);
   }
 
   public static ZeroBlock create(){
-    return new ZeroBlock(new ArrayList<>());
+    return new ZeroBlock(new ArrayList<>(), LinkSync.getDefault());
   }
 
   @Override
