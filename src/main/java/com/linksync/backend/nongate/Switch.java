@@ -2,32 +2,28 @@ package com.linksync.backend.nongate;
 
 import com.linksync.backend.abstracts.AbstractConnection;
 import com.linksync.backend.service.LinkSync;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Clock extends AbstractConnection {
-  @Getter
-  private final int delay;
+public class Switch extends AbstractConnection {
   private boolean on;
   private final List<Line> outputs;
   private final LinkSync linkSync;
 
-  private Clock(int delay, List<Line> outputs, LinkSync linkSync){
+  private Switch(List<Line> outputs, LinkSync linkSync){
     super(outputs, linkSync);
-    this.delay =delay;
     this.outputs=outputs;
     this.linkSync=linkSync;
     linkSync.followLink(this);
   }
 
-  public static Clock create(int delay){
-    return new Clock(delay, new ArrayList<>(), LinkSync.getDefault());
+  public static Switch create(){
+    return new Switch(new ArrayList<>(), LinkSync.getDefault());
   }
 
-  public static Clock create(int delay, LinkSync linkSync) {
-    return new Clock(delay, new ArrayList<>(), linkSync);
+  public static Switch create(LinkSync linkSync) {
+    return new Switch(new ArrayList<>(), linkSync);
   }
 
   @Override
@@ -40,9 +36,7 @@ public class Clock extends AbstractConnection {
   }
 
   public void trigger() {
-    if(linkSync.getPropagationTime()% delay == 0){
-      on=!on;
-      linkSync.trigger(this);
-    }
+    on=!on;
+    linkSync.trigger(this);
   }
 }
