@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
+<AnchorPane fx:id="menubar" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@../style/menubar.css" />
+    </stylesheets>
+    <MenuBar useSystemMenuBar="true" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Menu text="_File">
+            <MenuItem text="New"/>
+            <MenuItem text="Open"/>
+            <MenuItem text="Close"/>
+        </Menu>
+        <Menu text="_Edit">
+            <MenuItem text="Undo"/>
+            <MenuItem text="Redo"/>
+        </Menu>
+        <Menu text="_Help">
+            <MenuItem text="about"/>
+        </Menu>
+    </MenuBar>
+</AnchorPane>

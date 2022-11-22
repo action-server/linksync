@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:id="tool_window" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@../style/tool-window.css" />
+    </stylesheets>
+    <Accordion expandedPane="$first_titledPane">
+        <panes>
+            <TitledPane fx:id="first_titledPane" text="Gates">
+                <ScrollPane>
+                    <TilePane>
+                    </TilePane>
+                </ScrollPane>
+            </TitledPane>
+            <TitledPane text="Non Gates">
+                <ScrollPane>
+                    <TilePane>
+                    </TilePane>
+                </ScrollPane>
+            </TitledPane>
+            <TitledPane text="Components">
+                <ScrollPane>
+                    <TilePane>
+                    </TilePane>
+                </ScrollPane>
+            </TitledPane>
+        </panes>
+    </Accordion>
+</VBox>

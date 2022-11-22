@@ -1,0 +1,51 @@
+/*
+AnchorPane#root, BorderPane{
+      -fx-pref-height: 720;
+      -fx-pref-width: 1280;
+}
+
+AnchorPane Accordion{
+      -fx-pref-width: 30em;
+      -fx-pref-height: 60em;
+      -fx-max-height: 60em;
+      -fx-translate-x: 3em;
+      -fx-translate-y: 3em;
+      -fx-background-color: white;
+      -fx-background-radius: 3em, 3em;
+      -fx-padding: 35 0 35 0;
+}
+
+AnchorPane AnchorPane{
+      -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+TitledPane {
+    -fx-animated: true;
+}
+
+TilePane{
+    -fx-border-width: 0;
+}
+
+TitledPane > *{
+    -fx-pref-height: 5em;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+TilePane * {
+    -fx-max-width:5em;
+    -fx-max-height:5em;
+    -fx-background-color: white;
+    -fx-background-radius: 3em, 3em;
+    -fx-hgap: 5em;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+ScrollPane{
+    -fx-fit-to-width:true;
+    -fx-hbar-policy:never;
+    -fx-vbar-policy:as-needed;
+}
+*/
